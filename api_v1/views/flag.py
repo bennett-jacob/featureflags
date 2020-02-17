@@ -33,3 +33,18 @@ class FlagBindingList(generics.ListAPIView):
 
 
 flag_binding_list_view = FlagBindingList.as_view()
+
+
+class FlagBindingDetail(generics.RetrieveAPIView):
+    serializer_class = BindingSerializer
+    lookup_field = "subject"
+
+    def get_queryset(self):
+        try:
+            flag_name = self.kwargs.get("name")
+            return Binding.objects.filter(flag__name=flag_name)
+        except:
+            return Binding.objects.none()
+
+
+flag_binding_detail_view = FlagBindingDetail.as_view()
