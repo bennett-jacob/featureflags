@@ -22,6 +22,9 @@ urlpatterns = [
     re_path(
         r"^/redoc$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
     ),
+    # bindings
+    path("/bindings", views.binding_list_view, name="binding_list"),
+    path("/bindings/<str:pk>", views.binding_detail_view, name="binding_detail"),
     # flags
     path("/flags", views.flag_list_view, name="flag_list"),
     path("/flags/<str:name>", views.flag_detail_view, name="flag_detail"),
